@@ -18,26 +18,22 @@ An interactive terminal-based systemctl controller with arrow key navigation. Ma
 
 ```
 ===== svc - Service Controller =====
-17 services
+8 services
 
-  ▶ kururin.service                   [active]  :3000
-    paper.service                     [active]  :8080
-    papermcp.service                  [active]  :9090
-    papernote-review.service          [active]
-    specgen.service                   [active]  :18080
-    afk-code.service                  [failed]
-    papernote.service                 [failed]
-    aide-fim-claude.service           [inactive] ⏱running *-*-* 05:00:00
-    apache-log-analyzer.service       [inactive] ⏱running Tue *-*-* 05:20:00
-    auto-error-article-claude.service [inactive] ⏱running *-*-* 02:00:00
-    attendance-management.service     [inactive]
-    tls-alert.service                 [inactive] ⏱running *-*-* 16:30:00
+  ▶ my-webapp.service                  [active]  :3000
+    api-server.service                 [active]  :8080,8443
+    background-worker.service          [active]
+    my-app.service                     [failed]
+    data-sync.service                  [inactive] ⏱running *-*-* 05:00:00
+    backup.service                     [inactive] ⏱running Tue *-*-* 03:00:00
+    log-rotate.service                 [inactive] ⏱enabled *-*-* 02:00:00
+    monitoring.service                 [inactive]
 
   ↑↓:move Enter:select d:delete ESC/q:quit
 ```
 
 ```
---- kururin.service [active] [enabled] ---
+--- my-webapp.service [active] [enabled] ---
 
   ▶ stop
     restart
@@ -78,7 +74,7 @@ svc
 
 # Direct mode — jump to a specific service
 svc nginx
-svc papernote
+svc my-webapp
 ```
 
 ### Controls
@@ -149,26 +145,22 @@ MIT License
 
 ```
 ===== svc - サービスコントローラ =====
-17個のサービス
+8個のサービス
 
-  ▶ kururin.service                   [active]  :3000
-    paper.service                     [active]  :8080
-    papermcp.service                  [active]  :9090
-    papernote-review.service          [active]
-    specgen.service                   [active]  :18080
-    afk-code.service                  [failed]
-    papernote.service                 [failed]
-    aide-fim-claude.service           [inactive] ⏱running *-*-* 05:00:00
-    apache-log-analyzer.service       [inactive] ⏱running Tue *-*-* 05:20:00
-    auto-error-article-claude.service [inactive] ⏱running *-*-* 02:00:00
-    attendance-management.service     [inactive]
-    tls-alert.service                 [inactive] ⏱running *-*-* 16:30:00
+  ▶ my-webapp.service                  [active]  :3000
+    api-server.service                 [active]  :8080,8443
+    background-worker.service          [active]
+    my-app.service                     [failed]
+    data-sync.service                  [inactive] ⏱running *-*-* 05:00:00
+    backup.service                     [inactive] ⏱running Tue *-*-* 03:00:00
+    log-rotate.service                 [inactive] ⏱enabled *-*-* 02:00:00
+    monitoring.service                 [inactive]
 
   ↑↓:移動 Enter:選択 d:削除 ESC/q:戻る
 ```
 
 ```
---- kururin.service [active] [enabled] ---
+--- my-webapp.service [active] [enabled] ---
 
   ▶ stop
     restart
@@ -209,7 +201,7 @@ svc
 
 # 直接指定 — 特定サービスのアクション画面へ直行
 svc nginx
-svc papernote
+svc my-webapp
 ```
 
 ### 操作キー

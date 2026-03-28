@@ -379,8 +379,19 @@ do_action() {
             enabled_label="${DIM}disabled${RESET}"
         fi
 
+        # ExecStart, WorkingDirectory取得
+        local exec_start work_dir
+        exec_start=$(grep '^ExecStart=' "/etc/systemd/system/$svc" 2>/dev/null | sed 's/^ExecStart=//')
+        work_dir=$(grep '^WorkingDirectory=' "/etc/systemd/system/$svc" 2>/dev/null | sed 's/^WorkingDirectory=//')
+
         echo ""
         echo -e "${BOLD}--- ${CYAN}${svc}${RESET} [$(status_colored "$raw_st")] [${enabled_label}]${timer_info} ${BOLD}---${RESET}"
+        [ -n "$work_dir" ] && echo -e "${DIM}Dir:  ${work_dir}${RESET}"
+        if [ -n "$exec_start" ]; then
+            echo "$exec_start" | while IFS= read -r line; do
+                echo -e "${DIM}Exec: ${line}${RESET}"
+            done
+        fi
         echo ""
         local enable_action=""
         if [ "$enabled_st" = "enabled" ]; then

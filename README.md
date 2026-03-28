@@ -34,6 +34,8 @@ An interactive terminal-based systemctl controller with arrow key navigation. Ma
 
 ```
 --- my-webapp.service [active] [enabled] ---
+Dir:  /home/user/app/my-webapp
+Exec: /usr/bin/node server.js --port 3000
 
   ▶ stop
     restart
@@ -161,6 +163,8 @@ MIT License
 
 ```
 --- my-webapp.service [active] [enabled] ---
+Dir:  /home/user/app/my-webapp
+Exec: /usr/bin/node server.js --port 3000
 
   ▶ stop
     restart

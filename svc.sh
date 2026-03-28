@@ -227,10 +227,20 @@ get_service_ports() {
     main_pid=$(systemctl show -p MainPID --value "$svc" 2>/dev/null)
     [ -z "$main_pid" ] || [ "$main_pid" = "0" ] && return
 
-    # MainPIDとその子プロセスのポートを集約
+    # 全子孫プロセスを再帰的に取得
+    get_all_descendants() {
+        local parent="$1"
+        echo "$parent"
+        local child
+        for child in $(pgrep -P "$parent" 2>/dev/null); do
+            get_all_descendants "$child"
+        done
+    }
+
+    # MainPIDと全子孫プロセスのポートを集約
     local all_ports=""
     local pid
-    for pid in $main_pid $(pgrep -P "$main_pid" 2>/dev/null); do
+    for pid in $(get_all_descendants "$main_pid"); do
         if [ -n "${PORT_CACHE[$pid]}" ]; then
             if [ -z "$all_ports" ]; then
                 all_ports="${PORT_CACHE[$pid]}"
